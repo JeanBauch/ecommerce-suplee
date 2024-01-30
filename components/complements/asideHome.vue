@@ -2,10 +2,11 @@
   <aside class="flex flex-row md:flex-col justify-center items-center md:justify-center md:w-[50%] relative">
     <div class="px-12 md:px-0">
       <h2
-        class="font-semibold text-[2.5rem] lg:text-5xl xl:text-6xl leading-tight text-lime-800 drop-shadow-sm text-center hidden md:block">
+        class="font-semibold text-[2.5rem] lg:text-5xl xl:text-6xl leading-tight text-lime-800 dark:md:text-lime-500 drop-shadow-sm text-center hidden md:block">
         Imunize-se!<br>Suplementos para<br> sua saúde
       </h2>
-      <h3 class="font-semibold text-2xl leading-tight text-lime-800 drop-shadow-sm text-left block md:hidden">
+      <h3
+        class="font-semibold text-2xl leading-tight text-lime-800 dark:md:text-lime-500 drop-shadow-sm text-left block md:hidden">
         Imunize-se!
       </h3>
     </div>

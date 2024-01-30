@@ -2,7 +2,8 @@
 </script>
 
 <template>
-  <div class="hidden md:flex justify-between gap-10 lg:gap-6 xl:gap-12 font-semibold text-xl lg:text-2xl text-lime-800">
+  <div
+    class="hidden md:flex justify-between gap-10 lg:gap-6 xl:gap-12 font-semibold text-xl lg:text-2xl text-lime-800 dark:md:text-lime-500">
     <nuxt-link to="/" aria-label="Voltar para página Inicial">
       <h3 class="lg:w-32 text-left lg:text-center">
         Tela inicial

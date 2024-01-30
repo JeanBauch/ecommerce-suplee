@@ -14,7 +14,8 @@ definePageMeta({
 
           <main class="flex flex-col justify-center items-end lg:items-center md:w-[50%] gap-4 xl:gap-6 2xl:gap-8">
             <div class="self-start px-6 sm:px-8 md:px-0 md:self-center">
-              <h2 class="text-2xl md:text-4xl xl:text-5xl font-semibold text-lime-800 drop-shadow-sm">
+              <h2
+                class="text-2xl md:text-4xl xl:text-5xl font-semibold text-lime-800 dark:md:text-lime-500 drop-shadow-sm">
                 Encontre o que precisa
               </h2>
             </div>

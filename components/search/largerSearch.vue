@@ -14,12 +14,7 @@ async function search(q: any) {
 
 const configUi = {
   rounded: 'rounded-lg',
-  padding: { '2xs': 'px-3 py-4', 'xs': 'px-3.5 py-4.5', 'sm': 'px-3.5 py-4.5', md: 'px-4 py-5', xl: 'px-4 py-5' },
-  color: {
-    white: {
-      outline: "shadow-sm bg-white dark:bg-white text-gray-900 dark:text-gray-900 ring-1 ring-inset ring-lime-50 dark:ring-lime-50 focus:ring-2 focus:ring-primary-800 dark:focus:ring-primary-800"
-    }
-  }
+  padding: { '2xs': 'px-3 py-4', 'xs': 'px-3.5 py-4.5', 'sm': 'px-3.5 py-4.5', md: 'px-4 py-5', xl: 'px-4 py-5' }
 }
 </script>
 

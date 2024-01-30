@@ -4,7 +4,7 @@
 
 <template>
   <div
-    class="w-full bg-[#788B5B] md:bg-transparent transition-colors duration-700 relative rounded-b-[5.5rem] sm:rounded-b-[7rem] drop-shadow-2xl shadow-green-900 z-50">
+    class="w-full bg-[#788B5B] dark:bg-slate-950 dark:md:bg-transparent md:bg-transparent transition-colors duration-700 relative rounded-b-[5.5rem] sm:rounded-b-[7rem] drop-shadow-2xl shadow-green-900 z-50">
     <div class="absolute inset-0 block md:hidden w-full h-full z-0">
       <div
         class="bg-[url('/bg-complement/bg-header-vital.svg')] bg-center bg-contain bg-no-repeat absolute w-full h-full" />
@@ -16,7 +16,9 @@
 
         <AppHeaderNavigation />
 
-        <div class="flex-1 md:flex-none flex justify-between px-8 sm:px-24 md:px-0 gap-4 text-lime-800">
+        <div class="flex-1 md:flex-none flex justify-between px-8 sm:px-24 md:px-0 gap-2 text-lime-800">
+          <AppHeaderActionsToggleTheme />
+
           <AppHeaderActionsShoppingCart />
 
           <AppHeaderActionsUserSettings />

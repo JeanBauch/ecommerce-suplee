@@ -5,7 +5,7 @@
   <div
     class="w-full mb-8 px-6 sm:px-8 md:px-0 md:w-[90%] lg:w-[80%] xl:w-2/3 flex flex-col gap-4 xl:gap-6 2xl:gap-8 relative">
     <div
-      class="group relative cursor-pointer shadow-green-700 rounded-lg bg-white before:content-[''] before:absolute before:transition-all before:duration-500 before:w-2 before:h-full before:bg-orange-700 before:rounded-tl-lg before:rounded-bl-lg hover:before:w-full hover:before:rounded-lg"
+      class="group relative cursor-pointer shadow-green-700 rounded-lg bg-white dark:bg-slate-900 dark:border-gray-700 dark:border before:content-[''] before:absolute before:transition-all before:duration-500 before:w-2 before:h-full before:bg-orange-700 before:rounded-tl-lg before:rounded-bl-lg hover:before:w-full hover:before:rounded-lg"
       @click="$emit('selectCategoryFilter', 'Minerais')">
       <div class="relative flex items-center h-full py-3 px-5">
         <div class="relative min-w-[48px]">
@@ -33,7 +33,8 @@
           <h3 class="font-light text-2xl text-orange-700 transition-colors duration-500 group-hover:text-white">
             Minerais
           </h3>
-          <p class="font-light text-sm text-slate-500 transition-colors duration-500 group-hover:text-white">
+          <p
+            class="font-light text-sm text-slate-500 dark:text-slate-400 transition-colors duration-500 group-hover:text-white">
             Ajuda na fortificação óssea
           </p>
         </div>
@@ -41,7 +42,7 @@
     </div>
 
     <div
-      class="group relative cursor-pointer shadow-green-700 rounded-lg bg-white before:content-[''] before:absolute before:transition-all before:duration-500 before:w-2 before:h-full before:bg-lime-700 before:rounded-tl-lg before:rounded-bl-lg hover:before:w-full hover:before:rounded-lg"
+      class="group relative cursor-pointer shadow-green-700 rounded-lg bg-white dark:bg-slate-900 dark:border-gray-700 dark:border before:content-[''] before:absolute before:transition-all before:duration-500 before:w-2 before:h-full before:bg-lime-700 before:rounded-tl-lg before:rounded-bl-lg hover:before:w-full hover:before:rounded-lg"
       @click="$emit('selectCategoryFilter', 'Proteínas')">
       <div class="relative flex items-center h-full py-3 px-5">
         <div class="relative min-w-[48px] text-white">
@@ -64,7 +65,8 @@
           <h3 class="font-light text-2xl text-lime-700 duration-500 group-hover:text-white">
             Muscular - Proteínas
           </h3>
-          <p class="font-light text-sm text-slate-500 transition-colors duration-500 group-hover:text-white">
+          <p
+            class="font-light text-sm text-slate-500 dark:text-slate-400 transition-colors duration-500 group-hover:text-white">
             Auxilia na reconstrução do tecido muscular
           </p>
         </div>
@@ -72,7 +74,7 @@
     </div>
 
     <div
-      class="group relative cursor-pointer shadow-green-700 rounded-lg bg-white before:content-[''] before:absolute before:transition-all before:duration-500 before:w-2 before:h-full before:bg-green-700 before:rounded-tl-lg before:rounded-bl-lg hover:before:w-full hover:before:rounded-lg"
+      class="group relative cursor-pointer shadow-green-700 rounded-lg bg-white dark:bg-slate-900 dark:border-gray-700 dark:border before:content-[''] before:absolute before:transition-all before:duration-500 before:w-2 before:h-full before:bg-green-700 before:rounded-tl-lg before:rounded-bl-lg hover:before:w-full hover:before:rounded-lg"
       @click="$emit('selectCategoryFilter', 'Vitaminas')">
       <div class="relative flex items-center h-full py-3 px-5">
         <div class="relative min-w-[48px] text-white">
@@ -89,7 +91,8 @@
           <h3 class="font-light text-2xl text-green-700 duration-500 group-hover:text-white">
             Vitaminas
           </h3>
-          <p class="font-light text-sm text-slate-500 transition-colors duration-500 group-hover:text-white">
+          <p
+            class="font-light text-sm text-slate-500 dark:text-slate-400 transition-colors duration-500 group-hover:text-white">
             Ajuda na regularização do organismo
           </p>
         </div>
@@ -97,12 +100,12 @@
     </div>
 
     <div
-      class="group relative cursor-pointer shadow-green-700 rounded-lg bg-white before:content-[''] before:absolute before:transition-all before:duration-500 before:w-2 before:h-full before:bg-lime-950 before:rounded-tl-lg before:rounded-bl-lg hover:before:w-full hover:before:rounded-lg"
+      class="group relative cursor-pointer shadow-green-700 rounded-lg bg-white dark:bg-slate-900 dark:border-gray-700 dark:border before:content-[''] before:absolute before:transition-all before:duration-500 before:w-2 before:h-full before:bg-lime-950 before:dark:bg-lime-500 before:rounded-tl-lg before:rounded-bl-lg hover:before:w-full hover:before:rounded-lg"
       @click="$emit('selectCategoryFilter', 'Ômega-3')">
       <div class="relative flex items-center h-full py-3 px-5">
         <div class="relative min-w-[48px] text-white">
           <svg width="48" height="48" viewBox="0 0 48 48"
-            class="stroke-lime-950 group-hover:stroke-white transition-all duration-500" fill="none"
+            class="stroke-lime-950 dark:stroke-lime-500 group-hover:stroke-white transition-all duration-500" fill="none"
             xmlns="http://www.w3.org/2000/svg">
             <path
               d="M18.7878 45.0001C17.7589 41.6447 16.2067 39.1433 14.1312 37.4958C11.0178 35.0246 6.07108 36.5605 4.24382 34.0116C2.41655 31.4626 5.52402 26.7752 6.61447 24.0094C7.70492 21.2437 2.43488 20.2657 3.05015 19.4805C3.46035 18.9571 6.12346 17.4465 11.0396 14.949C12.4364 6.983 17.5959 3 26.5182 3C39.9014 3 45.0001 14.3463 45.0001 21.5629C45.0001 28.7795 38.8262 36.5541 30.0314 38.2304C29.2449 39.3757 30.3792 41.6323 33.4341 45.0001"
@@ -113,10 +116,11 @@
           </svg>
         </div>
         <div class="ml-7">
-          <h3 class="font-light text-2xl text-lime-950 duration-500 group-hover:text-white">
+          <h3 class="font-light text-2xl text-lime-950 dark:text-lime-500 duration-500 group-hover:text-white">
             Ômega-3 e DHA
           </h3>
-          <p class="font-light text-sm text-slate-500 transition-colors duration-500 group-hover:text-white">
+          <p
+            class="font-light text-sm text-slate-500 dark:text-slate-400 transition-colors duration-500 group-hover:text-white">
             Ajuda no combate de declínio cerebral
           </p>
         </div>
