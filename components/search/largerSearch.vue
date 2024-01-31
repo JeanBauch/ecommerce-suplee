@@ -1,21 +1,29 @@
 <script setup lang="ts">
-const loading = ref(false)
-const selected = ref()
+const loading = ref(false);
+const selected = ref();
 
 async function search(q: any) {
-  loading.value = true
+  loading.value = true;
 
-  const users = await $fetch('https://jsonplaceholder.typicode.com/users', { params: { q } })
+  const users = await $fetch("https://jsonplaceholder.typicode.com/users", {
+    params: { q },
+  });
 
-  loading.value = false
+  loading.value = false;
 
-  return users
+  return users;
 }
 
 const configUi = {
-  rounded: 'rounded-lg',
-  padding: { '2xs': 'px-3 py-4', 'xs': 'px-3.5 py-4.5', 'sm': 'px-3.5 py-4.5', md: 'px-4 py-5', xl: 'px-4 py-5' }
-}
+  rounded: "rounded-lg",
+  padding: {
+    "2xs": "px-3 py-4",
+    xs: "px-3.5 py-4.5",
+    sm: "px-3.5 py-4.5",
+    md: "px-4 py-5",
+    xl: "px-4 py-5",
+  },
+};
 </script>
 
 <template>
@@ -35,9 +43,33 @@ const configUi = {
   </div> -->
   <div class="md:w-[90%] lg:w-[80%] xl:w-2/3 hidden md:block">
     <div class="relative w-full">
-      <UInputMenu size="xl" trailing-icon="i-heroicons-magnifying-glass" v-model="selected" :search="search"
-        :loading="loading" placeholder="Digite aqui o produto que procura..." option-attribute="name" trailing by="id"
-        :ui="configUi" />
+      <UInputMenu
+        :ui="configUi"
+        size="xl"
+        aria-label="Busca de produtos"
+        trailing
+        id="search-product-by-home"
+        v-model="selected"
+        :search="search"
+        :loading="loading"
+        placeholder="Digite aqui o produto que procura..."
+        option-attribute="name"
+        by="id"
+      >
+        <template #trailing>
+          <UButton
+            v-if="!loading"
+            color="gray"
+            variant="ghost"
+            aria-label="Icone da busca de produtos"
+          >
+            <UIcon
+              name="i-heroicons-magnifying-glass"
+              class="flex-shrink-0 h-6 w-6 text-gray-400 dark:text-gray-500"
+            />
+          </UButton>
+        </template>
+      </UInputMenu>
     </div>
   </div>
 </template>

@@ -1,7 +1,16 @@
 <script setup lang="ts">
 definePageMeta({
-  layout: false,
+  layout: false
 });
+
+useSeoMeta({
+  title: 'Suplee',
+  ogTitle: 'Suplee',
+  description: 'Suplee é um e-commerce de Suplementos.',
+  ogDescription: 'Suplee é um e-commerce de Suplementos.',
+  ogImage: 'https://example.com/image.png',
+  twitterCard: 'summary_large_image',
+})
 
 </script>
 
