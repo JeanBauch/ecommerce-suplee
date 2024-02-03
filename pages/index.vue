@@ -1,17 +1,16 @@
 <script setup lang="ts">
 definePageMeta({
-  layout: false
+  layout: false,
 });
 
 useSeoMeta({
-  title: 'Suplee',
-  ogTitle: 'Suplee',
-  description: 'Suplee é um e-commerce de Suplementos.',
-  ogDescription: 'Suplee é um e-commerce de Suplementos.',
-  ogImage: 'https://example.com/image.png',
-  twitterCard: 'summary_large_image',
-})
-
+  title: "Suplee",
+  ogTitle: "Suplee",
+  description: "Suplee é um e-commerce de Suplementos.",
+  ogDescription: "Suplee é um e-commerce de Suplementos.",
+  ogImage: "https://example.com/image.png",
+  twitterCard: "summary_large_image",
+});
 </script>
 
 <template>
@@ -21,20 +20,36 @@ useSeoMeta({
         <div class="flex flex-col md:flex-row md:gap-4 xl:gap-0">
           <ComplementsAsideHome />
 
-          <main class="flex flex-col justify-center items-end lg:items-center md:w-[50%] gap-4 xl:gap-6 2xl:gap-8">
+          <main
+            class="flex flex-col justify-center items-end lg:items-center md:w-[50%] gap-4 xl:gap-6 2xl:gap-8"
+          >
             <div class="self-start px-6 sm:px-8 md:px-0 md:self-center">
               <h2
-                class="text-2xl md:text-4xl xl:text-5xl font-semibold text-lime-800 dark:md:text-lime-500 drop-shadow-sm">
+                class="text-2xl md:text-4xl xl:text-5xl font-semibold text-lime-800 dark:md:text-lime-500 drop-shadow-sm"
+              >
                 Encontre o que precisa
               </h2>
             </div>
 
-            <SearchLargerSearch />
+            <SearchLargerInput />
 
             <ButtonsLargerCategory />
           </main>
         </div>
       </section>
     </NuxtLayout>
+    <section
+      id="sessaoDeSuplementos"
+      class="bg-slate-300 dark:bg-slate-900 min-h-screen"
+    >
+      <div class="md:container mx-auto">
+        <AppListProductsSearchHeader />
+        <AppListProductsFiltersMobile />
+        <div class="flex md:justify-between">
+          <AppListProductsFilters />
+          <AppListProductsViewCards />
+        </div>
+      </div>
+    </section>
   </div>
 </template>

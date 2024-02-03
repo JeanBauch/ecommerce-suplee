@@ -48,6 +48,7 @@ const configUi = {
         size="xl"
         aria-label="Busca de produtos"
         trailing
+        trailing-icon="i-heroicons-magnifying-glass"
         id="search-product-by-home"
         v-model="selected"
         :search="search"
@@ -56,19 +57,19 @@ const configUi = {
         option-attribute="name"
         by="id"
       >
-        <template #trailing>
+        <!-- <template #trailing>
           <UButton
-            v-if="!loading"
             color="gray"
             variant="ghost"
             aria-label="Icone da busca de produtos"
+            class="p-0 cursor-auto"
           >
             <UIcon
               name="i-heroicons-magnifying-glass"
               class="flex-shrink-0 h-6 w-6 text-gray-400 dark:text-gray-500"
             />
           </UButton>
-        </template>
+        </template> -->
       </UInputMenu>
     </div>
   </div>
