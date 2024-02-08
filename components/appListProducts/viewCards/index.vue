@@ -1,131 +1,85 @@
 <script setup lang="ts">
-type ImagensCardProduct = {
-  nomeImagem: string;
-  urlImagemOriginal: string;
-  urlImagemReduzida: string;
-  urlImagemMaior: string;
-};
-type ProductCard = {
-  id: string;
-  imagens: ImagensCardProduct[];
-  nome: string;
-  nomeCategoria: string;
-  nomeEfeito: string[];
-  preco: number;
-};
-type responseProducts = {
-  produtos: Array<ProductCard>;
-};
+const propsGridProducts = defineProps<{
+  filters: Filters;
+}>();
 
-const allProducts: responseProducts = {
-  produtos: [
-    {
-      id: "01",
-      nome: "Produto 01",
-      nomeCategoria: "Vitaminas",
-      nomeEfeito: ["Imunidade", "Memória", "Fortificação Óssea"],
-      preco: 50,
-      imagens: [
-        {
-          nomeImagem: "Imagem do Produto 01",
-          urlImagemOriginal: "",
-          urlImagemReduzida: "",
-          urlImagemMaior: "",
-        },
-      ],
+const currentPage = ref<number>(1);
+const quantity = ref<number>(8);
+const filterCategory = ref<Categories | null>(null);
+const products = ref<Array<ProductCard>>([]);
+
+let totalItems: number = 0;
+const { data, pending, status } = await useLazyFetch<responseProducts>(
+  "/api/products",
+  {
+    query: {
+      nomeCategoria: filterCategory,
+      pagina: currentPage,
+      quantidade: quantity,
     },
-    {
-      id: "02",
-      nome: "Produto 02",
-      nomeCategoria: "Proteínas",
-      nomeEfeito: ["Relaxante", "Vitamina D", "Imunidade"],
-      preco: 80,
-      imagens: [
-        {
-          nomeImagem: "Imagem do Produto 02",
-          urlImagemOriginal: "",
-          urlImagemReduzida: "",
-          urlImagemMaior: "",
-        },
-      ],
-    },
-    {
-      id: "03",
-      nome: "Produto 03",
-      nomeCategoria: "Minerais",
-      nomeEfeito: [
-        "Fortificação Óssea",
-        "Fortalecimento Muscular",
-        "Imunidade",
-      ],
-      preco: 80,
-      imagens: [
-        {
-          nomeImagem: "Imagem do Produto 03",
-          urlImagemOriginal: "",
-          urlImagemReduzida: "",
-          urlImagemMaior: "",
-        },
-      ],
-    },
-    {
-      id: "04",
-      nome: "Produto 04",
-      nomeCategoria: "Ômega-3",
-      nomeEfeito: ["Fortificação Óssea", "Fortalecimento Muscular"],
-      preco: 100,
-      imagens: [
-        {
-          nomeImagem: "Imagem do Produto 04",
-          urlImagemOriginal: "",
-          urlImagemReduzida: "",
-          urlImagemMaior: "",
-        },
-      ],
-    },
-    {
-      id: "05",
-      nome: "Produto 05",
-      nomeCategoria: "Vitaminas",
-      nomeEfeito: ["Fortificação Óssea", "Fortalecimento Muscular"],
-      preco: 120,
-      imagens: [
-        {
-          nomeImagem: "Imagem do Produto 05",
-          urlImagemOriginal: "",
-          urlImagemReduzida: "",
-          urlImagemMaior: "",
-        },
-      ],
-    },
-    {
-      id: "06",
-      nome: "Produto 06",
-      nomeCategoria: "Minerais",
-      nomeEfeito: ["Fortificação Óssea", "Fortalecimento Muscular"],
-      preco: 200,
-      imagens: [
-        {
-          nomeImagem: "Imagem do Produto 06",
-          urlImagemOriginal: "",
-          urlImagemReduzida: "",
-          urlImagemMaior: "",
-        },
-      ],
-    },
-  ],
-};
+  }
+);
+
+watch(
+  data,
+  (newData) => {
+    if (newData) {
+      products.value.push(...(data.value?.produtos ?? []));
+      totalItems = data.value?.quantidadeProdutosPeloFiltro ?? 0;
+    }
+  },
+  { immediate: true }
+);
+watch(
+  () => propsGridProducts.filters.categoriaSelecionada,
+  (newFilters, oldFilters) => {
+    products.value = [];
+    console.log("Mudou o filtro");
+    console.log("New", newFilters);
+    console.log("Old", oldFilters);
+    if (newFilters !== oldFilters) {
+      resetPagination();
+    }
+
+    filterCategory.value = newFilters;
+  }
+);
+
+const currentQuantityDisplayed = computed(() => products.value.length);
+const shouldShowPagination = computed(
+  () => products.value.length >= totalItems
+);
+
+function handleClickLoadMoreItems() {
+  if (pending.value) return;
+  currentPage.value++;
+}
+
+function resetPagination() {
+  currentPage.value = 1;
+  quantity.value = 8;
+}
 </script>
 
 <template>
   <main
-    class="w-full lg:max-w-6xl px-4 sm:px-8 pt-2 lg:mt-6 grid grid-rows-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-16 pb-28 relative"
+    class="w-full lg:max-w-6xl px-4 sm:px-8 pt-2 lg:mt-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-4 gap-4 pb-28 relative"
   >
-    <div v-for="(produto, index) in allProducts.produtos" :key="index">
-      <a :href="`produto/${produto.id}`">
-        <CardsProductLarger :produto="produto" />
-      </a>
-    </div>
-    <AppListProductsPagination />
+    <template v-if="pending">
+      <CardsProductLargerSkeleton v-for="key in quantity" :key="key" />
+    </template>
+    <template v-else>
+      <div v-for="(product, index) in products" :key="index">
+        <a :href="`produto/${product.id}`">
+          <CardsProductLarger :produto="product" />
+        </a>
+      </div>
+    </template>
+    <AppListProductsPagination
+      v-show="!shouldShowPagination"
+      :current-items-displayed="currentQuantityDisplayed"
+      :total-items="totalItems"
+      @handleClickLoadMoreItems="handleClickLoadMoreItems"
+    />
   </main>
 </template>

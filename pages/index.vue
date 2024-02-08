@@ -11,6 +11,26 @@ useSeoMeta({
   ogImage: "https://example.com/image.png",
   twitterCard: "summary_large_image",
 });
+
+const currentFilter = reactive<Filters>({
+  categoriaSelecionada: null,
+  efeitoSelecionado: null,
+});
+
+function handleSelectFilter({
+  category,
+  effect,
+}: {
+  category: Categories;
+  effect: Effects;
+}) {
+  category && (currentFilter["categoriaSelecionada"] = category);
+  effect && (currentFilter["efeitoSelecionado"] = effect);
+}
+
+function handleClearCategoryFilter() {
+  currentFilter.categoriaSelecionada = null;
+}
 </script>
 
 <template>
@@ -42,12 +62,15 @@ useSeoMeta({
       id="sessaoDeSuplementos"
       class="bg-slate-300 dark:bg-slate-900 min-h-screen"
     >
-      <div class="md:container mx-auto">
+      <div class="lg:container mx-auto">
         <AppListProductsSearchHeader />
         <AppListProductsFiltersMobile />
         <div class="flex md:justify-between">
-          <AppListProductsFilters />
-          <AppListProductsViewCards />
+          <AppListProductsFilters
+            @changeCategorySelected="handleSelectFilter"
+            @clearCategorySelected="handleClearCategoryFilter"
+          />
+          <AppListProductsViewCards :filters="currentFilter" />
         </div>
       </div>
     </section>

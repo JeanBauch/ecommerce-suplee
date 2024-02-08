@@ -41,36 +41,38 @@ const configUi = {
       </span>
     </div>
   </div> -->
-  <div class="md:w-[90%] lg:w-[80%] xl:w-2/3 hidden md:block">
-    <div class="relative w-full">
-      <UInputMenu
-        :ui="configUi"
-        size="xl"
-        aria-label="Busca de produtos"
-        trailing
-        trailing-icon="i-heroicons-magnifying-glass"
-        id="search-product-by-home"
-        v-model="selected"
-        :search="search"
-        :loading="loading"
-        placeholder="Digite aqui o produto que procura..."
-        option-attribute="name"
-        by="id"
-      >
-        <!-- <template #trailing>
-          <UButton
-            color="gray"
-            variant="ghost"
-            aria-label="Icone da busca de produtos"
-            class="p-0 cursor-auto"
-          >
-            <UIcon
-              name="i-heroicons-magnifying-glass"
-              class="flex-shrink-0 h-6 w-6 text-gray-400 dark:text-gray-500"
-            />
-          </UButton>
-        </template> -->
-      </UInputMenu>
+  <client-only>
+    <div class="md:w-[90%] lg:w-[80%] xl:w-2/3 hidden md:block">
+      <div class="relative w-full">
+        <UInputMenu
+          :ui="configUi"
+          size="xl"
+          aria-label="Busca de produtos"
+          trailing
+          trailing-icon="i-heroicons-magnifying-glass"
+          id="search-product-by-home"
+          v-model="selected"
+          :search="search"
+          :loading="loading"
+          placeholder="Digite aqui o produto que procura..."
+          option-attribute="name"
+          by="id"
+        >
+          <!-- <template #trailing>
+            <UButton
+              color="gray"
+              variant="ghost"
+              aria-label="Icone da busca de produtos"
+              class="p-0 cursor-auto"
+            >
+              <UIcon
+                name="i-heroicons-magnifying-glass"
+                class="flex-shrink-0 h-6 w-6 text-gray-400 dark:text-gray-500"
+              />
+            </UButton>
+          </template> -->
+        </UInputMenu>
+      </div>
     </div>
-  </div>
+  </client-only>
 </template>

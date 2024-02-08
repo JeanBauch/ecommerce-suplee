@@ -2,5 +2,8 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxt/ui', '@nuxtjs/web-vitals', '@vueuse/nuxt', '@pinia/nuxt'],
-  css: ['~/assets/css/main.css']
+  css: ['~/assets/css/main.css'],
+  imports: {
+    dirs: ['types/*.ts', 'store/*.ts', 'types/**/*.ts'],
+  },
 })
