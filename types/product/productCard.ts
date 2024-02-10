@@ -7,7 +7,7 @@ export type ProductCard = {
   preco: number;
 };
 
-type ImagensCardProduct = {
+export type ImagensCardProduct = {
   nomeImagem: string;
   urlImagemOriginal: string;
   urlImagemReduzida: string;

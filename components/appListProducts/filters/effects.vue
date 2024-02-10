@@ -1,8 +1,35 @@
 <script setup lang="ts">
+const effectEmit = defineEmits<{
+  changeSelected: [effect: Effects];
+  clearSelected: [void];
+}>();
+
+const effectSelected = ref<Effects | null>(null);
+
+function handleToggleEffect(effect: Effects) {
+  if (isEffectSelected(effect)) {
+    handleClearFilterCategory();
+    return;
+  }
+
+  effectSelected.value = effect;
+  effectEmit("changeSelected", effect);
+}
+
+function handleClearFilterCategory() {
+  if (effectSelected.value === null) return;
+
+  effectSelected.value = null;
+  effectEmit("clearSelected");
+}
+
+function isEffectSelected(effect: Effects) {
+  return effect === effectSelected.value;
+}
 </script>
 
 <template>
-  <div class="bg-white dark:bg-slate-950 rounded-xl w-64 shadow-lg">
+  <div class="bg-slate-50 dark:bg-slate-950 rounded-xl w-64 shadow-lg">
     <div class="px-6 py-4 border-b border-b-gray-300 dark:border-b-gray-600">
       <h3 class="text-xl font-medium">Efeitos</h3>
     </div>
@@ -17,12 +44,17 @@
             id="ImunidadeButtonFilter"
             aria-label="Botão para filtrar efeitos de imunidade"
             class="w-full flex flex-col gap-2 justify-start items-center cursor-pointer group hover:no-underline"
+            @click="handleToggleEffect('Imunidade')"
           >
             <div
               class="bg-slate-100 dark:bg-slate-900 shadow-xl rounded-full p-2"
             >
               <svg
-                :class="false ? 'text-lime-800 dark:text-lime-500' : ''"
+                :class="
+                  isEffectSelected('Imunidade')
+                    ? 'text-lime-800 dark:text-lime-500'
+                    : ''
+                "
                 class="group-hover:text-lime-800 dark:group-hover:text-lime-500"
                 width="42"
                 height="42"
@@ -41,7 +73,11 @@
               </svg>
             </div>
             <span
-              :class="false ? 'text-lime-800 dark:text-lime-500' : ''"
+              :class="
+                isEffectSelected('Imunidade')
+                  ? 'text-lime-800 dark:text-lime-500'
+                  : ''
+              "
               class="text-base font-light group-hover:text-lime-800 dark:group-hover:text-lime-500"
               >Imunidade</span
             >
@@ -54,12 +90,17 @@
             id="FortMuscularButtonFilter"
             aria-label="Botão para filtrar efeitos de fortalecimento muscular"
             class="w-full flex flex-col gap-2 justify-start items-center cursor-pointer group hover:no-underline"
+            @click="handleToggleEffect('Fortalecimento Muscular')"
           >
             <div
               class="bg-gray-100 dark:bg-slate-900 shadow-xl rounded-full p-2"
             >
               <svg
-                :class="false ? 'text-lime-800 dark:text-lime-500' : ''"
+                :class="
+                  isEffectSelected('Fortalecimento Muscular')
+                    ? 'text-lime-800 dark:text-lime-500'
+                    : ''
+                "
                 class="group-hover:text-lime-800 dark:group-hover:text-lime-500"
                 width="42"
                 height="42"
@@ -83,7 +124,11 @@
               </svg>
             </div>
             <span
-              :class="false ? 'text-lime-800 dark:text-lime-500' : ''"
+              :class="
+                isEffectSelected('Fortalecimento Muscular')
+                  ? 'text-lime-800 dark:text-lime-500'
+                  : ''
+              "
               class="text-sm text-center font-light group-hover:text-lime-800 dark:group-hover:text-lime-500"
               >Fortalecimento<br />muscular</span
             >
@@ -96,12 +141,17 @@
             id="MemoriaButtonFilter"
             aria-label="Botão para filtrar efeitos de mémoria"
             class="w-full flex flex-col gap-2 justify-start items-center cursor-pointer group hover:no-underline"
+            @click="handleToggleEffect('Memória')"
           >
             <div
               class="bg-gray-100 dark:bg-slate-900 shadow-xl rounded-full p-2"
             >
               <svg
-                :class="false ? 'text-lime-800 dark:text-lime-500' : ''"
+                :class="
+                  isEffectSelected('Memória')
+                    ? 'text-lime-800 dark:text-lime-500'
+                    : ''
+                "
                 class="group-hover:text-lime-800 dark:group-hover:text-lime-500"
                 width="42"
                 height="42"
@@ -127,7 +177,11 @@
               </svg>
             </div>
             <span
-              :class="false ? 'text-lime-800 dark:text-lime-500' : ''"
+              :class="
+                isEffectSelected('Memória')
+                  ? 'text-lime-800 dark:text-lime-500'
+                  : ''
+              "
               class="text-base font-light group-hover:text-lime-800 dark:group-hover:text-lime-500"
               >Memória</span
             >
@@ -140,12 +194,17 @@
             id="FortOsseaButtonFilter"
             aria-label="Botão para filtrar efeitos de Fortificação Óssea"
             class="w-full flex flex-col gap-2 justify-start items-center cursor-pointer group hover:no-underline"
+            @click="handleToggleEffect('Fortificação Óssea')"
           >
             <div
               class="bg-gray-100 dark:bg-slate-900 shadow-xl rounded-full p-2"
             >
               <svg
-                :class="false ? 'text-lime-800 dark:text-lime-500' : ''"
+                :class="
+                  isEffectSelected('Fortificação Óssea')
+                    ? 'text-lime-800 dark:text-lime-500'
+                    : ''
+                "
                 class="group-hover:text-lime-800 dark:group-hover:text-lime-500"
                 width="42"
                 height="42"
@@ -179,7 +238,11 @@
               </svg>
             </div>
             <span
-              :class="false ? 'text-lime-800 dark:text-lime-500' : ''"
+              :class="
+                isEffectSelected('Fortificação Óssea')
+                  ? 'text-lime-800 dark:text-lime-500'
+                  : ''
+              "
               class="text-sm text-center font-light group-hover:text-lime-800 dark:group-hover:text-lime-500"
             >
               Fortificação<br />osséa
@@ -193,13 +256,22 @@
             id="VitDButtonFilter"
             aria-label="Botão para filtrar efeitos de Vitamina D"
             class="w-full flex flex-col gap-2 justify-start items-center cursor-pointer group hover:no-underline"
+            @click="handleToggleEffect('Vitamina D')"
           >
             <div
-              :class="false ? 'fill-lime-800 dark:fill-lime-500' : ''"
+              :class="
+                isEffectSelected('Vitamina D')
+                  ? 'fill-lime-800 dark:fill-lime-500'
+                  : ''
+              "
               class="bg-gray-100 dark:bg-slate-900 dark:fill-white shadow-xl rounded-full p-2 group-hover:fill-lime-800 dark:group-hover:fill-lime-500"
             >
               <svg
-                :class="false ? 'fill-lime-800 dark:fill-lime-500' : ''"
+                :class="
+                  isEffectSelected('Vitamina D')
+                    ? 'fill-lime-800 dark:fill-lime-500'
+                    : ''
+                "
                 class="group-hover:fill-lime-800 dark:group-hover:fill-lime-500 w-[42px] h-[42px]"
                 width="73"
                 height="73"
@@ -217,7 +289,11 @@
               </svg>
             </div>
             <span
-              :class="false ? 'text-lime-800 dark:text-lime-500' : ''"
+              :class="
+                isEffectSelected('Vitamina D')
+                  ? 'text-lime-800 dark:text-lime-500'
+                  : ''
+              "
               class="text-base font-light group-hover:text-lime-800 dark:group-hover:text-lime-500"
             >
               Vitamina D
@@ -231,12 +307,17 @@
             id="RelaxanteButtonFilter"
             aria-label="Botão para filtrar efeitos de relaxamento"
             class="w-full flex flex-col gap-2 justify-start items-center cursor-pointer group hover:no-underline"
+            @click="handleToggleEffect('Relaxante')"
           >
             <div
               class="bg-gray-100 dark:bg-gray-900 shadow-xl rounded-full p-2"
             >
               <svg
-                :class="false ? 'text-lime-800 dark:text-lime-500' : ''"
+                :class="
+                  isEffectSelected('Relaxante')
+                    ? 'text-lime-800 dark:text-lime-500'
+                    : ''
+                "
                 class="group-hover:text-lime-800 dark:group-hover:text-lime-500"
                 width="42"
                 height="42"
@@ -253,7 +334,11 @@
               </svg>
             </div>
             <span
-              :class="false ? 'text-lime-800 dark:text-lime-500' : ''"
+              :class="
+                isEffectSelected('Relaxante')
+                  ? 'text-lime-800 dark:text-lime-500'
+                  : ''
+              "
               class="text-base font-light group-hover:text-lime-800 dark:group-hover:text-lime-500"
             >
               Relaxante

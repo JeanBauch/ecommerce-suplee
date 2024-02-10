@@ -1,7 +1,8 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 const propsPagination = defineProps<{
   totalItems: number;
   currentItemsDisplayed: number;
+  isLoading: boolean;
 }>();
 </script>
 
@@ -16,6 +17,7 @@ const propsPagination = defineProps<{
     <UButton
       variant="link"
       aria-label="Ver mais produtos"
+      :class="propsPagination.isLoading ? 'loaderPaginationAnim' : ''"
       class="hover:no-underline flex justify-center items-center gap-1 text-lime-800 relative py-2 group before:content-[''] before:absolute before:w-full before:h-1 before:rounded before:bg-lime-800 before:bottom-0 before:left-0 before:origin-right before:scale-x-0 before:transition-transform before:duration-300 hover:before:origin-left hover:before:scale-x-100"
       @click="
         () => {
@@ -35,3 +37,6 @@ const propsPagination = defineProps<{
     </UButton>
   </div>
 </template>
+
+<style lang="scss" scoped>
+</style>

@@ -2,6 +2,8 @@
 const filtersDesktopEmit = defineEmits<{
   changeCategorySelected: [{ category: Categories }];
   clearCategorySelected: [void];
+  changeEffectSelected: [{ effect: Effects }];
+  clearEffectSelected: [void];
 }>();
 
 function receiveEventFilterCategory(categorySelected: Categories) {
@@ -9,6 +11,13 @@ function receiveEventFilterCategory(categorySelected: Categories) {
 }
 function receiveEventFilterClearCategory() {
   filtersDesktopEmit("clearCategorySelected");
+}
+
+function receiveEventFilterEffect(effectSelected: Effects) {
+  filtersDesktopEmit("changeEffectSelected", { effect: effectSelected });
+}
+function receiveEventFilterClearEffect() {
+  filtersDesktopEmit("clearEffectSelected");
 }
 </script>
 
@@ -21,7 +30,10 @@ function receiveEventFilterClearCategory() {
         @clearSelected="receiveEventFilterClearCategory"
       />
 
-      <AppListProductsFiltersEffects />
+      <AppListProductsFiltersEffects
+        @changeSelected="receiveEventFilterEffect"
+        @clearSelected="receiveEventFilterClearEffect"
+      />
     </div>
   </div>
 </template>

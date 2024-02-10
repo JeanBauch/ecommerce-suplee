@@ -5,58 +5,21 @@ const propsValue = defineProps<{
 
 const accountBRL = useAccountBRL(propsValue.produto.preco);
 
-const classObject = computed(() => ({
-  themeBgPill:
-    propsValue.produto.nomeCategoria === "Vitaminas"
-      ? "bg-[#CCE4CD] dark:bg-slate-950 dark:border-2 dark:border-green-500"
-      : propsValue.produto.nomeCategoria === "Proteínas"
-      ? "bg-[#D0D5BE] dark:bg-slate-950 dark:border-2 dark:border-lime-600"
-      : propsValue.produto.nomeCategoria === "Minerais"
-      ? "bg-[#F0D0B4] dark:bg-slate-950 dark:border-2 dark:border-orange-500"
-      : propsValue.produto.nomeCategoria === "Ômega-3" &&
-        "bg-[#D5D8CF] dark:bg-slate-950 dark:border-2 dark:border-lime-300",
+const badgeColorByCategory = useColorByCategory(
+  propsValue.produto.nomeCategoria,
+  "backgroundBadge"
+);
+const textColorByCategory = useColorByCategory(
+  propsValue.produto.nomeCategoria,
+  "text"
+);
 
-  themeTextPill:
-    propsValue.produto.nomeCategoria === "Vitaminas"
-      ? "text-green-700 dark:text-green-500"
-      : propsValue.produto.nomeCategoria === "Proteínas"
-      ? "text-lime-700 dark:text-lime-600"
-      : propsValue.produto.nomeCategoria === "Minerais"
-      ? "text-orange-700 dark:text-orange-500"
-      : propsValue.produto.nomeCategoria === "Ômega-3" &&
-        "text-lime-950 dark:text-lime-300",
-}));
-
-function classColorEffectName(effectName: string) {
-  return effectName === "Imunidade"
-    ? "text-green-700 dark:text-green-500"
-    : effectName === "Fortalecimento Muscular"
-    ? "text-lime-700 dark:text-lime-600"
-    : effectName === "Fortificação Óssea"
-    ? "text-orange-700 dark:text-orange-500"
-    : effectName === "Memória"
-    ? "text-lime-800 dark:text-lime-300"
-    : effectName === "Vitamina D"
-    ? "text-orange-600 dark:text-orange-500"
-    : effectName === "Relaxante"
-    ? "text-gray-500 dark:text-gray-200"
-    : "text-green-700 dark:text-gray-500";
+function classColorEffectName(effectName: Effects) {
+  return useColorByEffect(effectName, "text");
 }
 
-function classStrokeEffectName(effectName: string) {
-  return effectName === "Imunidade"
-    ? "stroke-green-700 dark:stroke-green-500"
-    : effectName === "Fortalecimento Muscular"
-    ? "stroke-lime-700 dark:stroke-lime-600"
-    : effectName === "Fortificação Óssea"
-    ? "stroke-orange-700 dark:stroke-orange-500"
-    : effectName === "Memória"
-    ? "stroke-lime-800 dark:stroke-lime-300"
-    : effectName === "Vitamina D"
-    ? "stroke-orange-600 dark:stroke-orange-500 fill-orange-600 dark:fill-orange-500"
-    : effectName === "Relaxante"
-    ? "stroke-gray-500 dark:stroke-gray-200"
-    : "stroke-green-700 dark:stroke-gray-500";
+function classStrokeEffectName(effectName: Effects) {
+  return useColorByEffect(effectName, "stroke");
 }
 </script>
 
@@ -114,10 +77,10 @@ function classStrokeEffectName(effectName: string) {
 
         <div class="w-full flex flex-col justify-center items-center gap-3">
           <div
-            :class="classObject.themeBgPill"
+            :class="badgeColorByCategory"
             class="flex justify-center items-center px-2 py-[1px] bg-[#CCE4CD] rounded-full"
           >
-            <h5 :class="classObject.themeTextPill" class="text-sm font-bold">
+            <h5 :class="textColorByCategory" class="text-sm font-bold">
               {{ produto.nomeCategoria }}
             </h5>
           </div>

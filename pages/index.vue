@@ -31,6 +31,9 @@ function handleSelectFilter({
 function handleClearCategoryFilter() {
   currentFilter.categoriaSelecionada = null;
 }
+function handleClearEffectFilter() {
+  currentFilter.efeitoSelecionado = null;
+}
 </script>
 
 <template>
@@ -69,6 +72,8 @@ function handleClearCategoryFilter() {
           <AppListProductsFilters
             @changeCategorySelected="handleSelectFilter"
             @clearCategorySelected="handleClearCategoryFilter"
+            @changeEffectSelected="handleSelectFilter"
+            @clearEffectSelected="handleClearEffectFilter"
           />
           <AppListProductsViewCards :filters="currentFilter" />
         </div>

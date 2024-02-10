@@ -23,9 +23,22 @@ body {
 .shadow-green-perso {
   box-shadow: 0px 100px 80px rgba(126, 151, 91, 0.1), 0px 41.7776px 33.4221px rgba(126, 151, 91, 0.0718854), 0px 22.3363px 17.869px rgba(126, 151, 91, 0.0596107), 0px 12.5216px 10.0172px rgba(126, 151, 91, 0.05), 0px 6.6501px 5.32008px rgba(126, 151, 91, 0.0403893), 0px 2.76726px 2.21381px rgba(126, 151, 91, 0.0281146);
 }
+
 @media (min-width: 768px) {
   .shadow-green-perso-desktop {
     box-shadow: 0px 100px 80px rgba(126, 151, 91, 0.1), 0px 41.7776px 33.4221px rgba(126, 151, 91, 0.0718854), 0px 22.3363px 17.869px rgba(126, 151, 91, 0.0596107), 0px 12.5216px 10.0172px rgba(126, 151, 91, 0.05), 0px 6.6501px 5.32008px rgba(126, 151, 91, 0.0403893), 0px 2.76726px 2.21381px rgba(126, 151, 91, 0.0281146);
+  }
+}
+
+@keyframes loaderPagination {
+  from {
+    transform-origin: right;
+    transform: scaleX(0);
+  }
+
+  to {
+    transform-origin: left;
+    transform: scaleX(1);
   }
 }
 
@@ -95,6 +108,10 @@ body {
   }
 }
 
+.loaderPaginationAnim::before {
+  animation: loaderPagination 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
 .img-flutante {
   animation: float 6s ease-in-out infinite;
 }
@@ -114,4 +131,3 @@ input[type=number]::-webkit-outer-spin-button {
     height: calc(100vh - 6.5rem)
   }
 }
-

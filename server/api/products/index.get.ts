@@ -16,16 +16,22 @@ export default defineEventHandler(async (event) => {
   const page = Number(query.pagina ?? 1);
   const quantity = Number(query.quantidade ?? 8);
   const offset = (page - 1) * quantity;
-  const category = query.nomeCategoria;
+  const category = query.nomeCategoria?.toString();
+  const effect = query.nomeEfeito?.toString();
+  const containFilter = (category || effect);
+
   let productsFilteredByCategory = produtos;
   if (category) {
     productsFilteredByCategory = produtos.filter(p => { return p.nomeCategoria === category })
+  }
+  if (effect) {
+    productsFilteredByCategory = productsFilteredByCategory.filter(p => p.nomeEfeito.includes(effect))
   }
   const productsFiltered = productsFilteredByCategory.slice(offset, quantity + offset)
 
   const response = {
     produtos: productsFiltered,
-    quantidadeProdutosPeloFiltro: category ? productsFiltered.length : produtos.length
+    quantidadeProdutosPeloFiltro: containFilter ? productsFiltered.length : produtos.length
   }
   return response
 
