@@ -2,13 +2,7 @@
 const quantityProduct = ref(1);
 const bgColorByCategory = useColorByCategory("Vitaminas", "background");
 const textColorByCategory = useColorByCategory("Vitaminas", "text");
-const configUI = {
-  color: {
-    default: {
-      solid: `shadow-sm text-white focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 ${bgColorByCategory} hover:bg-opacity-80`,
-    }
-  }
-}
+
 </script>
 
 <template>
@@ -67,7 +61,7 @@ const configUI = {
             <UFormGroup>
               <UButtonGroup size="xl" orientation="horizontal">
                 <UInput placeholder="Digite seu CEP" icon="i-heroicons-map-pin" />
-                <UButton icon="i-heroicons-magnifying-glass-20-solid" loading color="default" :ui="configUI" />
+                <UButton icon="i-heroicons-magnifying-glass-20-solid" loading color="gray" />
               </UButtonGroup>
             </UFormGroup>
           </UForm>
@@ -101,7 +95,7 @@ const configUI = {
     </div>
 
     <div class="pt-9 xl:pt-0 w-[80%] xl:w-full self-center">
-      <UButton padded block size="xl" color="default" :ui="configUI">Adicionar ao carrinho</UButton>
+      <UButton padded block size="xl" color="gray">Adicionar ao carrinho</UButton>
     </div>
   </div>
 </template>
