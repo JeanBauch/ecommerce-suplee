@@ -1,0 +1,4 @@
+<template>
+  <AppDetailProductHeadingTitle />
+  <AppDetailProductHeadingBreadcrumb />
+</template>

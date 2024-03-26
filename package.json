@@ -20,5 +20,16 @@
     "@pinia/nuxt": "^0.5.1",
     "@vueuse/nuxt": "^10.7.2",
     "pinia": "^2.1.7"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true,
+      "vue/setup-compiler-macros": true
+    },
+    "extends": [
+      "plugin:vue/vue3-essential",
+      "eslint:recommended"
+    ]
   }
 }

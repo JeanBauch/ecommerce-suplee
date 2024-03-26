@@ -86,9 +86,9 @@ function resetPagination() {
     </template>
     <template v-else>
       <div v-for="(product, index) in products" :key="index">
-        <a :href="`produto/${product.id}`">
+        <NuxtLink :to="`/suplemento/${product.id}`">
           <CardsProductLarger :produto="product" />
-        </a>
+        </NuxtLink>
       </div>
     </template>
     <AppListProductsPagination

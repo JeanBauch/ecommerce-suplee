@@ -1,5 +1,23 @@
 <script setup lang="ts">
+
 const bgColorByCategory = useColorByCategory("Vitaminas", "background");
+const classColorEffectName = (effectName: Effects):string => useColorByEffect(effectName, "text");
+const classStrokeEffectName = (effectName: Effects):string => useColorByEffect(effectName, "stroke");
+
+const effects = ref<Effects[]>(['Imunidade','Fortalecimento Muscular','Fortificação Óssea']);
+
+function renderSvgEffectByName(effectName: Effects) {
+  const componentName = {
+    "Imunidade": resolveComponent('SvgsIconImunity'),
+    "Fortalecimento Muscular": resolveComponent("SvgsIconMuscle"),
+    "Fortificação Óssea": resolveComponent("SvgsIconBone"),
+    "Memória": resolveComponent("SvgsIconBrain"),
+    "Vitamina D": resolveComponent("SvgsIconVitD"),
+    "Relaxante": resolveComponent("SvgsIconSleep")
+  };
+
+  return componentName[effectName];
+}
 </script>
 
 <template>
@@ -48,80 +66,28 @@ const bgColorByCategory = useColorByCategory("Vitaminas", "background");
           class="flex items-center"
         >
           <div
-            v-for="(efeito, index) in [
-              'Imunidade',
-              'Fortalecimento Muscular',
-              'Fortificação Óssea',
-            ]"
-            :key="index"
             class="flex flex-col justify-start items-center w-full max-w-[33%] h-full gap-1 group"
+            :key="index"
+            v-for="(effect, index) in effects"
           >
-            <div
-              class="bg-slate-50 dark:border dark:border-slate-50 dark:bg-transparent rounded-full flex items-center justify-center shadow p-2 w-12 h-12 lg:w-16 lg:h-16 xl:w-12 xl:h-12 2xl:w-14 2xl:h-14"
-            >
-              <!-- <img src="/icons/icon-imunity.svg" class="transition-all grayscale group-hover:grayscale-0" alt=""> -->
-              <img
-                v-if="false"
-                src="/icons/icon-imunity.svg"
-                width="28"
-                height="28"
-                class="w-7 h-7 lg:w-9 lg:h-10 transition-all grayscale group-hover:grayscale-0"
-                alt="Icone para o efeito imunidade"
+            <div class="flex flex-col items-center justify-center gap-1">
+              <component
+                :is="renderSvgEffectByName(effect)"
+                class="w-8 h-8 lg:w-8 lg:h-9 xl:w-7 xl:h-7 2xl:w-8 2xl:h-9 stroke-slate-50"
+                :alt="`Icone para o efeito de ${effect}`"
               />
-              <!-- <img
-            v-else-if="false"
-            src="/icons/icon-muscle.svg"
-            width="28"
-            height="28"
-            class="w-7 h-7 lg:w-9 lg:h-10 transition-all grayscale group-hover:grayscale-0"
-            alt="Icone para o efeito de Fortalecimento Muscular"
-          >
-          <img
-            v-else-if="false"
-            src="/icons/icon-bone.svg"
-            width="28"
-            height="28"
-            class="w-7 h-7 lg:w-9 lg:h-10 transition-all grayscale group-hover:grayscale-0"
-            alt="Icone para o efeito de Fortificação Óssea"
-          >
-          <img
-            v-else-if="false"
-            src="/icons/icon-brain.svg"
-            width="28"
-            height="28"
-            class="w-7 h-7 lg:w-9 lg:h-10 transition-all grayscale group-hover:grayscale-0"
-            alt="Icone para o efeito Memória"
-          >
-          <img
-            v-else-if="false"
-            src="/icons/icon-vit-d.svg"
-            width="28"
-            height="28"
-            class="w-7 h-7 lg:w-9 lg:h-10 transition-all grayscale group-hover:grayscale-0"
-            alt="Icone para o efeito Vitamina D"
-          >
-          <img
-            v-else-if="false"
-            src="/icons/icon-sleep.svg"
-            width="28"
-            height="28"
-            class="w-7 h-7 lg:w-9 lg:h-10 transition-all grayscale group-hover:grayscale-0"
-            alt="Icone para o efeito Relaxante"
-          > -->
-              <img
-                v-else
-                src="/icons/icon-imunity.svg"
-                width="28"
-                height="28"
-                class="w-7 h-7 lg:w-9 lg:h-10 transition-all grayscale group-hover:grayscale-0 text-white"
-                alt="Icone imunidade"
-              />
+              <span
+                class="font-bold text-[0.625rem] lg:text-xs xl:text-[0.625rem] 2xl:text-xs text-white"
+              >
+                {{
+                  effect === "Fortalecimento Muscular"
+                    ? "Muscular"
+                    : effect === "Fortificação Óssea"
+                    ? "Fort. Óssea"
+                    : effect
+                }}
+              </span>
             </div>
-            <p
-              class="font-light xl:text-sm 2xl:text-base text-center flex items-center justify-center flex-1"
-            >
-              Nome do Efeito
-            </p>
           </div>
         </div>
       </div>
