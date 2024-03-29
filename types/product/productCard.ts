@@ -5,6 +5,9 @@ export type ProductCard = {
   nomeCategoria: "Vitaminas" | "Proteínas" | "Minerais" | "Ômega-3";
   nomeEfeito: ListEffects;
   preco: number;
+  descricao: string,
+  composicao: string[]
+  palavras_chave: string[]
 };
 
 export type ImagensCardProduct = {

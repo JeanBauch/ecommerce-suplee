@@ -20,8 +20,16 @@ const { data, pending, status } = await useLazyFetch<responseProducts>(
       pagina: currentPage,
       quantidade: quantity,
     },
+    key: "allProducts"
   }
 );
+
+onMounted(() => {
+  if (data.value?.produtos.length) {
+    products.value = data.value.produtos;
+    totalItems = data.value?.quantidadeProdutosPeloFiltro ?? 0;
+  }
+});
 
 watch(
   data,
@@ -31,7 +39,7 @@ watch(
       totalItems = data.value?.quantidadeProdutosPeloFiltro ?? 0;
     }
   },
-  { immediate: true }
+  { deep: true }
 );
 watch(
   () => propsGridProducts.filters.categoriaSelecionada,
@@ -79,8 +87,7 @@ function resetPagination() {
 
 <template>
   <main
-    class="w-full lg:max-w-6xl px-4 sm:px-8 pt-2 lg:mt-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-4 gap-4 pb-28 relative"
-  >
+    class="w-full lg:max-w-6xl px-4 sm:px-8 pt-2 lg:mt-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-4 gap-4 pb-28 relative">
     <template v-if="pending && shouldShowInitialLoaderSkeleton">
       <CardsProductLargerSkeleton v-for="key in quantity" :key="key" />
     </template>
@@ -91,12 +98,8 @@ function resetPagination() {
         </NuxtLink>
       </div>
     </template>
-    <AppListProductsPagination
-      v-show="!shouldShowPagination"
-      :current-items-displayed="currentQuantityDisplayed"
-      :total-items="totalItems"
-      :is-loading="shouldShowLoaderPagination"
-      @handleClickLoadMoreItems="handleClickLoadMoreItems"
-    />
+    <AppListProductsPagination v-show="!shouldShowPagination" :current-items-displayed="currentQuantityDisplayed"
+      :total-items="totalItems" :is-loading="shouldShowLoaderPagination"
+      @handleClickLoadMoreItems="handleClickLoadMoreItems" />
   </main>
 </template>

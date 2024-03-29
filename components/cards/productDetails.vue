@@ -47,19 +47,16 @@ function renderSvgEffectByName(effectName: Effects) {
     class="w-full xl:w-[60%] pb-5 pt-20 xl:pt-6 xl:p-6 2xl:p-8 -mt-16 mb-20 md:mb-0 xl:mt-0 rounded-b-3xl xl:rounded-tl-3xl xl:rounded-bl-3xl xl:rounded-br-none shadow-green-500 relative z-10">
     <div class="w-full h-full flex flex-1 flex-col px-5 xl:px-0 text-white">
       <div
-        class="flex flex-col gap-3 2xl:gap-4 pb-6 2xl:pb-7 relative after:content-[''] after:w-full after:h-[1px] after:absolute after:bottom-0 after:rounded-full after:bg-slate-50 after:dark:bg-slate-300">
+        class="flex flex-1 flex-col gap-3 2xl:gap-4 pb-6 2xl:pb-7 relative after:content-[''] after:w-full after:h-[1px] after:absolute after:bottom-0 after:rounded-full after:bg-slate-50 after:dark:bg-slate-300">
         <h4 class="font-semibold text-xl 2xl:text-2xl">
           Descrição do Produto
         </h4>
         <p id="descriptionProduct" class="font-light text-justify text-base xl:text-sm 2xl:text-base">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus
-          repellendus praesentium totam delectus sequi? Corporis, quod nihil
-          animi earum dolorem nemo consequatur nam dolores repudiandae
-          doloribus cumque inventore ipsa sapiente.
+          {{ productDetail?.descricao }}
         </p>
       </div>
       <div
-        class="flex flex-col gap-3 2xl:gap-4 py-4 2xl:py-5 relative after:content-[''] after:w-full after:h-[1px] after:absolute after:bottom-0 after:rounded-full after:bg-slate-50 after:dark:bg-slate-300">
+        class="flex flex-1 flex-col gap-3 2xl:gap-4 py-4 2xl:py-5 relative after:content-[''] after:w-full after:h-[1px] after:absolute after:bottom-0 after:rounded-full after:bg-slate-50 after:dark:bg-slate-300">
         <h4 class="font-semibold text-xl 2xl:text-2xl">Efeitos</h4>
         <div :class="renderCorrectlyClassByLength()" class="flex items-center">
           <div class="flex flex-col justify-start items-center w-full max-w-[33%] h-full gap-1 group" :key="index"
@@ -75,10 +72,10 @@ function renderSvgEffectByName(effectName: Effects) {
           </div>
         </div>
       </div>
-      <div class="flex flex-col gap-3 2xl:gap-4 pt-4 2xl:pt-5 relative">
+      <div class="flex flex-1 flex-col gap-3 2xl:gap-4 pt-4 2xl:pt-5 relative">
         <h4 class="font-semibold text-xl 2xl:text-2xl">Composição</h4>
         <ul id="list-composition" class="pl-6 mb-4 columns-2 gap-16 columns-composition">
-          <li v-for="(item, index) in ['comp1', 'comp2', 'comp3']" :key="index"
+          <li v-for="(item, index) in productDetail?.composicao" :key="index"
             class="font-light xl:text-sm 2xl:text-base list-disc">
             {{ item }}
           </li>

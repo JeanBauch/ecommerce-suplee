@@ -33,6 +33,5 @@ export const useColorByCategory = (category: Categories, typeCss: TypeCss) => {
     }
   }
 
-
   return colorObject[category][typeCss];
 };
